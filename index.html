@@ -1,0 +1,27 @@
+<html>
+  <head>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
+   <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<section class="slideshow">
+
+    <div id="photos">
+
+    </div>  
+    
+<script>
+  $(function(){
+    var accessToken = '1136473808.1677ed0.42c03560b2b24bd38c28c5d624963f14';
+    $.getJSON('https://api.instagram.com/v1/users/self/media/recent/?access_token='+accessToken+'&callback=?',function (insta) {
+      $.each(insta.data,function (photos,src) {
+        if ( src.caption == null){ src.caption = 'no caption'};
+        if ( photos === 20 ) { return false; }
+        $('<a href="'+src.link+'" target="_blank" class="post">'+
+          '<div class="image" style="background-image:url('+src.images.standard_resolution.url+');"></div>').appendTo('#photos');
+      });
+    });
+  });
+</script>
